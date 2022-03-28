@@ -10,6 +10,12 @@ public class Jedi {
     public Jedi() {
     }
 
+    public Jedi(String name, int strength, int version) {
+        this.name = name;
+        this.strength = strength;
+        this.version = version;
+    }
+
     public Jedi(Integer id, String name, int strength, int version) {
         this.id = id;
         this.name = name;

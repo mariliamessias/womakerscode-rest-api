@@ -35,12 +35,11 @@ public class JediService {
         return jediRepositoryImpl.save(jedi);
     }
 
-    public boolean update(Jedi jedi) {
+    public boolean update(int id, Jedi jedi) {
         logger.info("Update Jedi from system");
-        return jediRepositoryImpl.findById(jedi.getId())
+        return jediRepositoryImpl.findById(id)
                 .map(result -> jediRepositoryImpl.update(jedi))
                 .orElse(false);
-
     }
 
     public boolean delete(int id) {

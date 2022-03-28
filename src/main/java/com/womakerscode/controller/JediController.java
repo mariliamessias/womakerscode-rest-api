@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import static java.util.Objects.isNull;
+
 @RestController
 @RequestMapping("/jedi")
 public class JediController {
@@ -44,6 +46,9 @@ public class JediController {
     public ResponseEntity<Jedi> saveJedi(@RequestBody Jedi jedi) {
 
         Jedi newJedi = jediService.save(jedi);
+        if (isNull(newJedi)) {
+            return ResponseEntity.unprocessableEntity().build();
+        }
 
         try {
             return ResponseEntity
@@ -53,6 +58,35 @@ public class JediController {
         } catch (URISyntaxException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Jedi> updateJedi(@PathVariable int id, @RequestBody Jedi jedi) {
+
+        if (!jediService.update(id , jedi)) {
+           return ResponseEntity.notFound().build();
+        }
+
+        try {
+            return ResponseEntity
+                    .ok()
+                    .eTag(Integer.toString(jedi.getVersion()))
+                    .location(new URI("/jedi/" + id))
+                    .body(jedi);
+        } catch (URISyntaxException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteJedi(@PathVariable int id) {
+
+        if (!jediService.delete(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.noContent().build();
+
     }
 
 }
