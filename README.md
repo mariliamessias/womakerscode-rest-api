@@ -44,7 +44,8 @@ No nível mais básico, uma API é um mecanismo que permite que um aplicativo ou
 ```
 
  <h4>Diagrama das entidades da aplicação:</h4>
- (in progress)
+ <img src="./rest-api.drawio.png">
+
  
   </br>
  <h4>Requests e Responses dos endpoints da aplicação:</h4>
