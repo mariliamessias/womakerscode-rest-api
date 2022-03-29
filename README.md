@@ -25,5 +25,9 @@ essa api é responsável por gerenciar a criação de novos Jedis. E foi desenvo
  (in progress)
  
  </br>
+ <h4>Diagrama das entidades da aplicação:</h4>
+ (in progress)
+ 
+  </br>
  <h4>Requests e Responses dos endpoints da aplicação:</h4>
  (in progress)
