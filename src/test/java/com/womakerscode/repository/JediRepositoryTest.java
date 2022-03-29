@@ -110,7 +110,7 @@ public class JediRepositoryTest {
         Jedi jedi = new Jedi(5, "Leia", 350, 1);
 
         // execucao
-        boolean result = jediRepository.update(jedi);
+        boolean result = jediRepository.update(5, jedi);
 
         // assert
         Assertions.assertFalse(result, "Jedi not updated");

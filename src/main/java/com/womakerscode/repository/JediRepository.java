@@ -10,6 +10,6 @@ public interface JediRepository {
     Optional<Jedi> findById(Integer id);
     List<Jedi> findAll();
     Jedi save(Jedi jedi);
-    boolean update(Jedi jedi);
+    boolean update(int id, Jedi jedi);
     boolean delete(Integer id);
 }

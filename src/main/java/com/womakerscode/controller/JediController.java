@@ -61,21 +61,14 @@ public class JediController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Jedi> updateJedi(@PathVariable int id, @RequestBody Jedi jedi) {
+    public ResponseEntity<Jedi> updateJedi(@PathVariable int id, @RequestBody Jedi jedi) throws URISyntaxException {
 
         if (!jediService.update(id , jedi)) {
            return ResponseEntity.notFound().build();
         }
 
-        try {
-            return ResponseEntity
-                    .ok()
-                    .eTag(Integer.toString(jedi.getVersion()))
-                    .location(new URI("/jedi/" + id))
-                    .body(jedi);
-        } catch (URISyntaxException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        return ResponseEntity.noContent().build();
+
     }
 
     @DeleteMapping("/{id}")

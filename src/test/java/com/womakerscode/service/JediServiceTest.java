@@ -108,7 +108,7 @@ public class JediServiceTest {
 
         // cenario
         Jedi mockJedi = new Jedi(1, "Jedi Name", 10, 1);
-        Mockito.doReturn(true).when(jediRepository).update(eq(mockJedi));
+        Mockito.doReturn(true).when(jediRepository).update(eq(1), eq(mockJedi));
         Mockito.doReturn(Optional.of(mockJedi)).when(jediRepository).findById(1);
         // execucao
         boolean result = jediService.update(1, mockJedi);
@@ -136,7 +136,7 @@ public class JediServiceTest {
 
         // cenario
         Jedi mockJedi = new Jedi(1, "Jedi Name", 10, 1);
-        Mockito.doReturn(false).when(jediRepository).update(eq(mockJedi));
+        Mockito.doReturn(false).when(jediRepository).update(eq(1),eq(mockJedi));
         Mockito.doReturn(Optional.of(mockJedi)).when(jediRepository).findById(1);
 
         // execucao

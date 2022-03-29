@@ -38,7 +38,7 @@ public class JediService {
     public boolean update(int id, Jedi jedi) {
         logger.info("Update Jedi from system");
         return jediRepositoryImpl.findById(id)
-                .map(result -> jediRepositoryImpl.update(jedi))
+                .map(result -> jediRepositoryImpl.update(id, jedi))
                 .orElse(false);
     }
 

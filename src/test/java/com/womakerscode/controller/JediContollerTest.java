@@ -125,14 +125,7 @@ public class JediContollerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(mockJedi)))
                 // asserts
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(header().string(HttpHeaders.ETAG, "\"1\""))
-
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.name", is("HanSolo")))
-                .andExpect(jsonPath("$.strength", is(55)))
-                .andExpect(jsonPath("$.version", is(1)));
+                .andExpect(status().isNoContent());
     }
 
     @Test
