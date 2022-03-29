@@ -24,6 +24,10 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+// Teste do delete com erro - deletar um id ja deletado
+// Teste do PUT com uma versao igual da ja existente - deve retornar um conflito
+
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -107,7 +111,6 @@ public class JediContollerTest {
                 // asserts
                 .andExpect(status().isUnprocessableEntity());
     }
-
 
     @Test
     @DisplayName("PUT /jedi- SUCCESS")

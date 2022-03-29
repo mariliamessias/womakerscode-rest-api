@@ -15,6 +15,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.eq;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class JediServiceTest {
@@ -24,7 +26,6 @@ public class JediServiceTest {
 
     @MockBean
     private JediRepositoryImpl jediRepository;
-
 
     @Test
     @DisplayName("Should return Jedi By Id with success")
@@ -84,5 +85,107 @@ public class JediServiceTest {
 
         // assert
         Assertions.assertTrue(returnedJedi.isEmpty(), "No Jedi was found");
+    }
+
+    @Test
+    @DisplayName("Should save a Jedi success")
+    public void testSaveSuccess() {
+
+        // cenario
+        Jedi mockJedi = new Jedi(1, "Jedi Name", 10, 1);
+        Mockito.doReturn(mockJedi).when(jediRepository).save(eq(mockJedi));
+
+        // execucao
+        Jedi returnedJedi = jediService.save(mockJedi);
+
+        // assert
+        Assertions.assertSame(returnedJedi, mockJedi, "Jedi must be the same");
+    }
+
+    @Test
+    @DisplayName("Should update a Jedi success")
+    public void testUpdateSuccess() {
+
+        // cenario
+        Jedi mockJedi = new Jedi(1, "Jedi Name", 10, 1);
+        Mockito.doReturn(true).when(jediRepository).update(eq(mockJedi));
+        Mockito.doReturn(Optional.of(mockJedi)).when(jediRepository).findById(1);
+        // execucao
+        boolean result = jediService.update(1, mockJedi);
+
+        // assert
+        Assertions.assertTrue(result, "Jedi not updated");
+    }
+
+    @Test
+    @DisplayName("Should not update a Jedi when not found")
+    public void testUpdateNotFound() {
+
+        // cenario
+        Jedi mockJedi = new Jedi(1, "Jedi Name", 10, 1);
+        // execucao
+        boolean result = jediService.update(1, mockJedi);
+
+        // assert
+        Assertions.assertFalse(result, "Jedi not found");
+    }
+
+    @Test
+    @DisplayName("Should not update a Jedi when fail")
+    public void testUpdateNotExecute() {
+
+        // cenario
+        Jedi mockJedi = new Jedi(1, "Jedi Name", 10, 1);
+        Mockito.doReturn(false).when(jediRepository).update(eq(mockJedi));
+        Mockito.doReturn(Optional.of(mockJedi)).when(jediRepository).findById(1);
+
+        // execucao
+        boolean result = jediService.update(1, mockJedi);
+
+        // assert
+        Assertions.assertFalse(result, "Jedi not updated");
+    }
+
+    @Test
+    @DisplayName("Should delete a Jedi success")
+    public void testDeleteSuccess() {
+
+        // cenario
+        Jedi mockJedi = new Jedi(1, "Jedi Name", 10, 1);
+        Mockito.doReturn(true).when(jediRepository).delete(eq(1));
+        Mockito.doReturn(Optional.of(mockJedi)).when(jediRepository).findById(1);
+
+        // execucao
+        boolean result = jediService.delete(1);
+
+        // assert
+        Assertions.assertTrue(result, "Jedi not deleted");
+    }
+
+    @Test
+    @DisplayName("Should not delete a Jedi when not found")
+    public void testDeleteNotFound() {
+
+        // execucao
+        boolean result = jediService.delete(1);
+
+        // assert
+        Assertions.assertFalse(result, "Jedi not found");
+    }
+
+    @Test
+    @DisplayName("Should not delete a Jedi when fail")
+    public void testDeleteNotExecute() {
+
+        // cenario
+        Jedi mockJedi = new Jedi(1, "Jedi Name", 10, 1);
+        Mockito.doReturn(false).when(jediRepository).delete(eq(1));
+        Mockito.doReturn(Optional.of(mockJedi)).when(jediRepository).findById(1);
+
+        // execucao
+        boolean result = jediService.delete(1);
+
+        // assert
+        Assertions.assertFalse(result, "Jedi not deleted");
     }
 }
