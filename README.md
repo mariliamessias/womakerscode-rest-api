@@ -43,8 +43,9 @@ No nível mais básico, uma API é um mecanismo que permite que um aplicativo ou
   spring-test-dbunit
 ```
 
- <h4>Diagrama das entidades da aplicação:</h4>
- (in progress)
+ <h4>Diagrama genérico das partes da aplicação:</h4>
+ <img src="./rest-api.drawio.png">
+
  
   </br>
  <h4>Requests e Responses dos endpoints da aplicação:</h4>
