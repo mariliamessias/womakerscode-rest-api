@@ -30,12 +30,94 @@ No nível mais básico, uma API é um mecanismo que permite que um aplicativo ou
 
 </ul>
  <h4>Bibliotecas utilizadas no desenvolvimento:</h4>
- (in progress)
  
- </br>
+```bash
+
+  spring-boot-starter-data-jdbc
+  spring-boot-starter-web
+  h2database
+  spring-boot-starter-test
+  junit-jupiter-api
+  dbunit
+  ider-core
+  spring-test-dbunit
+```
+
  <h4>Diagrama das entidades da aplicação:</h4>
  (in progress)
  
   </br>
  <h4>Requests e Responses dos endpoints da aplicação:</h4>
- (in progress)
+ 
+ <h5>Criação de um novo Jedi:</h5>
+ 
+ ```bash
+ Request:
+
+ curl --location --request POST 'localhost:8080/jedi' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "teste",
+    "strength": 123
+}'
+
+Response: 200 - OK
+
+{
+    "id": 1,
+    "name": "teste",
+    "strength": 123,
+    "version": 1
+}
+
+```
+
+<h5>Busca de Jedi por Id:</h5>
+ 
+ ```bash
+ Request:
+
+curl --location --request GET 'localhost:8080/jedi/1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "teste",
+    "strength": 123
+}'
+
+Response: 201 - Created
+
+{
+    "id": 1,
+    "name": "teste",
+    "strength": 123,
+    "version": 1
+}
+
+```
+
+<h5>Alteração nos dados do Jedi:</h5>
+ 
+ ```bash
+ Request:
+
+curl --location --request PUT 'localhost:8080/jedi/1' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "teste 2",
+    "strength": 123
+}'
+
+Response: 204 - No Content
+
+```
+
+<h5>Remoção nos dados do Jedi:</h5>
+ 
+ ```bash
+ Request:
+
+curl --location --request DELETE 'localhost:8080/jedi/1'
+
+Response: 204 - No Content
+
+```
