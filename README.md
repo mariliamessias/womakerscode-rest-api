@@ -50,6 +50,10 @@ No nível mais básico, uma API é um mecanismo que permite que um aplicativo ou
   </br>
  <h4>Requests e Responses dos endpoints da aplicação:</h4>
  
+  <h4>Diagrama genérico das partes da aplicação:</h4>
+ <img src="./swagger.png">
+
+
  <h5>Criação de um novo Jedi:</h5>
  
  ```bash
